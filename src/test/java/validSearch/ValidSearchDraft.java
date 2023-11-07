@@ -10,11 +10,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class ValidSearch {
+public class ValidSearchDraft {
     private WebDriver webDriver; //variable was created from library
 
     @Test
-    public void validSearch(){
+    public void validSearchDraft(){
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver(); //chrome was written to a webdriver variable;
         webDriver.manage().window().maximize();
