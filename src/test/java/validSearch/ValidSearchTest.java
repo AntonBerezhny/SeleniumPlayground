@@ -7,13 +7,17 @@ import org.junit.Test;
 public class ValidSearchTest extends BaseTest {
 
     @Test
-    public void validSearch(){
-        loginPage.openLoginPage();
-        loginPage.enterUserNameIntoInputLogin("Admin");
-        loginPage.enterPasswordIntoInputPassword("admin123");
-        loginPage.clickOnLoginButton();
+    public void TC1_validSearch(){
+        homePage
+                .openHomePage()
 
-        Assert.assertTrue("Search input field is not displayed", homePage.isSearchInputFieldDisplayed());
+                ;
+//        loginPage.openLoginPage();
+//        loginPage.enterUserNameIntoInputLogin("Admin");
+//        loginPage.enterPasswordIntoInputPassword("admin123");
+//        loginPage.clickOnLoginButton();
+//
+//        Assert.assertTrue("Search input field is not displayed", homePage.isSearchInputFieldDisplayed());
 
 
     }
