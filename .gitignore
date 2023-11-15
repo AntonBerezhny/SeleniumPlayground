@@ -17,3 +17,4 @@ target/site
 */src/main/java/resources/hiddenConfig.properties
 
 allure-results
+/log/qalight.log.1
