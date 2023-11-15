@@ -2,6 +2,7 @@ package pages;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -29,6 +30,16 @@ public class CommonActionsWithElements {
         try {
             webElement.click();
             logger.info("Element was clicked");
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void clearTheInputField(WebElement webElement){
+        try {
+            //webElement.clear();
+            webElement.sendKeys(Keys.BACK_SPACE);
+            logger.info("Element was cleared");
         }catch (Exception e){
             printErrorAndStopTest(e);
         }

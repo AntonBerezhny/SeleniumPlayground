@@ -13,6 +13,8 @@ public class ValidSearchTest extends BaseTest {
                 .checkAllMenuItemsArePresent(12)
                 .enterSearchRequestIntoSearchInput(SEARCH_REQUEST)
                 .checkCorrectNumberOfMenuItemsDisplayedUponSearch(SEARCH_REQUEST)
+                .clearTheSearchInputField()
+                .checkAllMenuItemsArePresent(12)
 
                 ;
 //        loginPage.openLoginPage();

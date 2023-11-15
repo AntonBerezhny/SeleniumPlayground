@@ -16,8 +16,9 @@ public class HomePage extends ParentPage{
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']")
     private List<WebElement> listOfMenuItems;
 
-    private String menuItemContainText = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()" +
-            "[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]]";
+    private String menuItemContainText = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]]";
+
+
 
 
     public HomePage(WebDriver webDriver) {
@@ -45,9 +46,9 @@ public class HomePage extends ParentPage{
     }
 
     public HomePage checkAllMenuItemsArePresent(int itemsQuantity) {
-        //WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
         Assert.assertEquals("The number of menu items doesn't correspond to expected",
                 itemsQuantity, listOfMenuItems.size());
+        logger.info(itemsQuantity + " menu items are present");
         return this;
     }
 
@@ -62,18 +63,20 @@ public class HomePage extends ParentPage{
 
     public HomePage checkCorrectNumberOfMenuItemsDisplayedUponSearch(String searchInput) {
        List<WebElement> listOfMenuItemsWithSearchRequest = getMenuItemsWithRequest(searchInput);
-       int counter = listOfMenuItemsWithSearchRequest.size();
-        for (int i = 0; i < counter; i++) {
             for (WebElement element: listOfMenuItemsWithSearchRequest){
-                if (element.getText().contains(searchInput)){
+                if (element.getText().toLowerCase().contains(searchInput)){
                     logger.info(element + " contains" + searchInput);
                 }else {
                     Assert.fail(element + " doesn't contain " + searchInput);
                 }
-            }
+            };
 
-        }
 
+        return this;
+    }
+
+    public HomePage clearTheSearchInputField() {
+        clearTheInputField(searchInputField);
         return this;
     }
 }
