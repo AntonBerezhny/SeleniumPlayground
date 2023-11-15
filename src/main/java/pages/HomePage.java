@@ -60,16 +60,19 @@ public class HomePage extends ParentPage{
         return webDriver.findElements(By.xpath(String.format(menuItemContainText, request)));
     }
 
-    public HomePage checkCorrectNumberOfMenuItemsDisplayedWithEnteredText(String searchInput) {
+    public HomePage checkCorrectNumberOfMenuItemsDisplayedUponSearch(String searchInput) {
        List<WebElement> listOfMenuItemsWithSearchRequest = getMenuItemsWithRequest(searchInput);
        int counter = listOfMenuItemsWithSearchRequest.size();
         for (int i = 0; i < counter; i++) {
+            for (WebElement element: listOfMenuItemsWithSearchRequest){
+                if (element.getText().contains(searchInput)){
+                    logger.info(element + " contains" + searchInput);
+                }else {
+                    Assert.fail(element + " doesn't contain " + searchInput);
+                }
+            }
 
         }
-
-       //Assert.assertEquals("no", 6, listOfMenuItemsWithSearchRequest.size());
-
-
 
         return this;
     }

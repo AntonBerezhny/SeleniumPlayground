@@ -12,7 +12,7 @@ public class ValidSearchTest extends BaseTest {
                 .openHomePage()
                 .checkAllMenuItemsArePresent(12)
                 .enterSearchRequestIntoSearchInput(SEARCH_REQUEST)
-                .checkCorrectNumberOfMenuItemsDisplayedWithEnteredText(SEARCH_REQUEST)
+                .checkCorrectNumberOfMenuItemsDisplayedUponSearch(SEARCH_REQUEST)
 
                 ;
 //        loginPage.openLoginPage();
