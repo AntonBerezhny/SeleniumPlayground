@@ -38,7 +38,9 @@ public class CommonActionsWithElements {
     protected void clearTheInputField(WebElement webElement){
         try {
             //webElement.clear();
-            webElement.sendKeys(Keys.BACK_SPACE);
+            while (!webElement.getAttribute("value").equals("")){
+                webElement.sendKeys(Keys.BACK_SPACE);
+            }
             logger.info("Element was cleared");
         }catch (Exception e){
             printErrorAndStopTest(e);
