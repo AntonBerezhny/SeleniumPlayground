@@ -13,7 +13,7 @@ public class invalidSearchTest extends BaseTest {
                 .openHomePage()
                 .checkAllMenuItemsArePresent(12)
                 .enterSearchRequestIntoSearchInput(INVALID_SEARCH_REQUEST)
-                .checkNoMenuItemsArePresent(0)
+                .checkNoMenuItemsArePresent()
                 .clearTheSearchInputField()
                 .checkAllMenuItemsArePresent(12)
                 ;

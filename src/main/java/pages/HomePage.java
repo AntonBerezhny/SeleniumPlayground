@@ -13,8 +13,11 @@ public class HomePage extends ParentPage{
     @FindBy(xpath = ".//input[@class='oxd-input oxd-input--active']")
     private WebElement searchInputField;
 
-    @FindBy(xpath = ".//input[@class='oxd-input oxd-input--active']")
-    private WebElement searchInputFieldActive;
+    @FindBy(xpath = ".//input[@class='oxd-input oxd-input--focus']")
+    private WebElement searchInputFieldFocus;
+
+    @FindBy(xpath = ".//input[@placeholder='Search']")
+    private WebElement searchInputFieldWithPlaceholder;
 
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']")
     private List<WebElement> listOfMenuItems;
@@ -32,6 +35,7 @@ public class HomePage extends ParentPage{
         try {
             return searchInputField.isDisplayed();
         }catch (Exception e){
+            logger.info("Search input field is not displayed");
             return false;
         }
     }
@@ -55,8 +59,9 @@ public class HomePage extends ParentPage{
         return this;
     }
 
-    public HomePage checkNoMenuItemsArePresent(int i) {
-
+    public HomePage checkNoMenuItemsArePresent() {
+        Assert.assertEquals("Menu items list is not blank", 0, listOfMenuItems.size());
+        logger.info(listOfMenuItems.size() + " menu items are present");
         return this;
     }
 
@@ -84,7 +89,7 @@ public class HomePage extends ParentPage{
     }
 
     public HomePage clearTheSearchInputField() {
-        clearTheInputField(searchInputField);
+        clearTheInputField(searchInputFieldWithPlaceholder);
         return this;
     }
 
