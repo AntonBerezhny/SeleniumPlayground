@@ -10,8 +10,11 @@ import java.util.List;
 
 public class HomePage extends ParentPage{
 
-    @FindBy(xpath = ".//input[@placeholder='Search']")
+    @FindBy(xpath = ".//input[@class='oxd-input oxd-input--active']")
     private WebElement searchInputField;
+
+    @FindBy(xpath = ".//input[@class='oxd-input oxd-input--active']")
+    private WebElement searchInputFieldActive;
 
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']")
     private List<WebElement> listOfMenuItems;
@@ -52,6 +55,11 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public HomePage checkNoMenuItemsArePresent(int i) {
+
+        return this;
+    }
+
     public HomePage enterSearchRequestIntoSearchInput(String searchRequest) {
         enterTextIntoElement(searchInputField, searchRequest);
         return this;
@@ -79,4 +87,6 @@ public class HomePage extends ParentPage{
         clearTheInputField(searchInputField);
         return this;
     }
+
+
 }

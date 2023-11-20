@@ -1,4 +1,4 @@
-package validSearch;
+package searchTest;
 
 import baseTest.BaseTest;
 import org.junit.Test;
@@ -17,12 +17,6 @@ public class ValidSearchTest extends BaseTest {
                 .checkAllMenuItemsArePresent(12)
 
                 ;
-//        loginPage.openLoginPage();
-//        loginPage.enterUserNameIntoInputLogin("Admin");
-//        loginPage.enterPasswordIntoInputPassword("admin123");
-//        loginPage.clickOnLoginButton();
-//
-//        Assert.assertTrue("Search input field is not displayed", homePage.isSearchInputFieldDisplayed());
 
 
     }
