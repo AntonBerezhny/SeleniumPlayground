@@ -1,6 +1,7 @@
 package searchTest;
 
 import baseTest.BaseTest;
+import libs.TestData;
 import org.junit.Test;
 
 public class ValidSearchTest extends BaseTest {
@@ -10,11 +11,11 @@ public class ValidSearchTest extends BaseTest {
     public void TC1_validSearch(){
         homePage
                 .openHomePage()
-                .checkAllMenuItemsArePresent(12)
+                .checkAllMenuItemsArePresent(TestData.NUMBER_OF_MENU_ELEMENTS)
                 .enterSearchRequestIntoSearchInput(SEARCH_REQUEST)
                 .checkCorrectNumberOfMenuItemsDisplayedUponSearch(SEARCH_REQUEST)
                 .clearTheSearchInputField()
-                .checkAllMenuItemsArePresent(12)
+                .checkAllMenuItemsArePresent(TestData.NUMBER_OF_MENU_ELEMENTS)
 
                 ;
 
