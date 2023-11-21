@@ -47,6 +47,23 @@ public class CommonActionsWithElements {
         }
     }
 
+    protected boolean isElementDisplayed(WebElement webElement){
+        try {
+            boolean state = webElement.isDisplayed();//if present return true, if no return false;
+            String message;
+            if (state){ // if (state)equals to if (state == true), if false need to write == false;
+                message = "Element is displayed";
+            } else {
+                message = "Element is not displayed";
+            }
+            logger.info(message);
+            return state;
+        }catch (Exception e){
+            logger.info("Element is not displayed");
+            return false;
+        }
+    }
+
     protected void printErrorAndStopTest(Exception e){
         logger.error("Can't work with element " + e);
         Assert.fail("Can't work with element " + e); //assert.fail stops test and mark as red
