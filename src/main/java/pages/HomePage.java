@@ -71,7 +71,8 @@ public class HomePage extends ParentPage{
     }
 
     public List<WebElement> getMenuItemsWithRequest(String request){
-        return webDriver.findElements(By.xpath(String.format(menuItemContainText, request)));
+        return webDriver.findElements(By.xpath(String.format(menuItemContainText, request))); //findElementS finds all element using specified locator, findElement return only first
+        // method populates 'request' into 's' locator in the top of the page
     }
 
     public HomePage checkCorrectNumberOfMenuItemsDisplayedUponSearch(String searchInput) {
