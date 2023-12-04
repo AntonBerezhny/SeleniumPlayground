@@ -27,8 +27,9 @@ public class CommonActionsWithElements {
         try {
             webDriverWait10.until(ExpectedConditions.visibilityOf(webElement));
             webElement.clear();
+            String name = getElementName(webElement);
             webElement.sendKeys(text);
-            logger.info(text + " was inputted into the element");
+            logger.info(text + " was inputted into the element " + name);
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
@@ -37,8 +38,9 @@ public class CommonActionsWithElements {
     protected void clickOnElement(WebElement webElement){
         try {
             webDriverWait10.until(ExpectedConditions.elementToBeClickable(webElement));
+            String name = getElementName(webElement);
             webElement.click();
-            logger.info("Element was clicked");
+            logger.info(name + " Element was clicked" );
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
@@ -61,15 +63,23 @@ public class CommonActionsWithElements {
             boolean state = webElement.isDisplayed();//if present return true, if no return false;
             String message;
             if (state){ // if (state)equals to if (state == true), if false need to write == false;
-                message = "Element is displayed";
+                message = getElementName(webElement) + " Element is displayed";
             } else {
-                message = "Element is not displayed";
+                message = getElementName(webElement) + " Element is not displayed";
             }
             logger.info(message);
             return state;
         }catch (Exception e){
             logger.info("Element is not displayed");
             return false;
+        }
+    }
+
+    private String getElementName(WebElement webElement){
+        try {
+            return webElement.getAccessibleName();
+        }catch (Exception e){
+            return "";
         }
     }
 
