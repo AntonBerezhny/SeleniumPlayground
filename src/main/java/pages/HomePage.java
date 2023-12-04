@@ -31,6 +31,11 @@ public class HomePage extends ParentPage{
         super(webDriver);
     }
 
+    @Override
+    String getRelativeURL() {
+        return "/web/index.php/dashboard/index";
+    }
+
     public boolean isSearchInputFieldDisplayed(){
         try {
             return searchInputField.isDisplayed();
@@ -42,12 +47,13 @@ public class HomePage extends ParentPage{
 
     public HomePage openHomePage() {
         LoginPage loginPage = new LoginPage(webDriver); //in this method we create an object needed to proceed to loginPage itself
-        loginPage.fillingLoginFormWithValidCreds();
+        loginPage.fillingLoginFormWithValidCreds();//ToDO change behavior????
         checkIsRedirectedToHomePage();
         return this;
     }
 
     public HomePage checkIsRedirectedToHomePage() {
+        checkURL();
         Assert.assertTrue("HomePage was not opened", isSearchInputFieldDisplayed()); //if isSear...false test will be stopped
         return this;
     }
@@ -71,7 +77,8 @@ public class HomePage extends ParentPage{
     }
 
     public List<WebElement> getMenuItemsWithRequest(String request){
-        return webDriver.findElements(By.xpath(String.format(menuItemContainText, request)));
+        return webDriver.findElements(By.xpath(String.format(menuItemContainText, request))); //findElementS finds all element using specified locator, findElement return only first
+        // method populates 'request' into 's' locator in the top of the page
     }
 
     public HomePage checkCorrectNumberOfMenuItemsDisplayedUponSearch(String searchInput) {

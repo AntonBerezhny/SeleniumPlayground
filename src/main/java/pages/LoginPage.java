@@ -21,9 +21,14 @@ public class LoginPage extends ParentPage{
         super(webDriver); //sending/setting webDriver to Parent page
     }
 
+    @Override
+    String getRelativeURL() { //implementation of abstract method
+        return "/";
+    }
+
     public void openLoginPage(){
         try {
-            webDriver.get("https://opensource-demo.orangehrmlive.com/");
+            webDriver.get(base_url + getRelativeURL());
             logger.info("Login Page was opened");
         }catch (Exception e){
             logger.error("Can't open login Page" + e);
