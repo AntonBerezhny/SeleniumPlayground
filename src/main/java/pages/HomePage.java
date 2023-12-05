@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class HomePage extends ParentPage{
 
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']")
     private List<WebElement> listOfMenuItems;
+
+    private String listOfMenuItemsString = ".//li[@class='oxd-main-menu-item-wrapper']";
 
     private String menuItemContainText = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]]";
 
@@ -64,7 +67,6 @@ public class HomePage extends ParentPage{
         Assert.assertEquals("The number of menu items doesn't correspond to expected",
                 itemsQuantity, listOfMenuItems.size());
         logger.info(itemsQuantity + " menu items are present");
-        logger.info(configProperties.list_of_menu_names());
         return this;
     }
 
@@ -103,5 +105,18 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public HomePage checkMenuItemsPresenceByName() {
+        List expectedListFromFile = configProperties.list_of_menu_names();
+        Collections.sort(expectedListFromFile);
 
+        ArrayList<String> listFromWebelement = new ArrayList<>();
+        for (WebElement element: listOfMenuItems){
+            listFromWebelement.add(element.getText());
+        }
+        Collections.sort(listFromWebelement);
+        logger.info(listFromWebelement);
+        logger.info(expectedListFromFile);
+        Assert.assertEquals(listFromWebelement,expectedListFromFile);
+        return this;
+    }
 }

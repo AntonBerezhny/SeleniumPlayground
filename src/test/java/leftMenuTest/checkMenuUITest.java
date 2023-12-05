@@ -8,6 +8,7 @@ public class checkMenuUITest extends BaseTest {
     public void checkMenuPresence(){
         homePage
                 .openHomePage()
+                .checkMenuItemsPresenceByName()
 
                 ;
     }
