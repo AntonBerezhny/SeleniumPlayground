@@ -1,11 +1,13 @@
 package pages;
 
+import libs.ConfigProperties;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.Collections;
 import java.util.List;
 
 public class HomePage extends ParentPage{
@@ -62,6 +64,7 @@ public class HomePage extends ParentPage{
         Assert.assertEquals("The number of menu items doesn't correspond to expected",
                 itemsQuantity, listOfMenuItems.size());
         logger.info(itemsQuantity + " menu items are present");
+        logger.info(configProperties.list_of_menu_names());
         return this;
     }
 
