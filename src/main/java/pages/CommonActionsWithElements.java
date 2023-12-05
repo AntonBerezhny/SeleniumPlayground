@@ -1,5 +1,7 @@
 package pages;
 
+import libs.ConfigProperties;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
@@ -15,6 +17,9 @@ public class CommonActionsWithElements {
     WebDriver webDriver; //this webDriver is available in all pages
     Logger logger = Logger.getLogger(getClass());  //logger will be available in all descendants
     WebDriverWait webDriverWait10, webDriverWait15; //initializing waits
+
+    public static ConfigProperties configProperties = ConfigFactory.create(ConfigProperties.class); //to create multiple files need to create multiple variables(configProperties)
+    //
 
     public CommonActionsWithElements(WebDriver webDriver) {   //driver to be available in all descendants
         this.webDriver = webDriver;
