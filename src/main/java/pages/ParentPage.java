@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 abstract public class ParentPage extends CommonActionsWithElements{ //this class will contain both abstract and already created classes
 
-    protected String base_url = "https://opensource-demo.orangehrmlive.com";
+    protected String base_url = configProperties.base_url();
 
     public ParentPage(WebDriver webDriver) {
         super(webDriver); //take Webdriver from Superclass

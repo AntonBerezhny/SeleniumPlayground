@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
@@ -19,6 +21,7 @@ public class BaseTest {
 
     @Before
     public void setUp(){
+        logger.info("--------------------------------------- " + testName.getMethodName() + " was started --------------");
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver(); // chrome was set in webDriver variable
         webDriver.manage().window().maximize();
@@ -32,7 +35,11 @@ public class BaseTest {
     public void tearDown(){
         webDriver.quit();
         logger.info("Browser was closed");
+        logger.info("--------------------------------------- " + testName.getMethodName() + " was ended ---------------");
 
     }
+
+    @Rule
+    public TestName testName = new TestName(); //before start of the test the name of the test will be written into testname variable
 
 }

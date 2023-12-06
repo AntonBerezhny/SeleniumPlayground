@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HomePage extends ParentPage{
@@ -21,6 +23,8 @@ public class HomePage extends ParentPage{
 
     @FindBy(xpath = ".//li[@class='oxd-main-menu-item-wrapper']")
     private List<WebElement> listOfMenuItems;
+
+    private String listOfMenuItemsString = ".//li[@class='oxd-main-menu-item-wrapper']";
 
     private String menuItemContainText = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]]";
 
@@ -100,5 +104,19 @@ public class HomePage extends ParentPage{
         return this;
     }
 
+    public HomePage checkLeftMenuItemsArePresent() {
+        ArrayList<String> actualListFromWebElement = new ArrayList<>();
+        for (WebElement element: listOfMenuItems){
+            actualListFromWebElement.add(element.getText());
+        }
+        Collections.sort(actualListFromWebElement);
 
+        List expectedListFromFile = configProperties.list_of_menu_names();
+        Collections.sort(expectedListFromFile);
+
+        logger.info(actualListFromWebElement + " menu items are present on the page");
+        logger.info(expectedListFromFile + " is the expected list from .properties file");
+        Assert.assertEquals(actualListFromWebElement,expectedListFromFile);
+        return this;
+    }
 }
