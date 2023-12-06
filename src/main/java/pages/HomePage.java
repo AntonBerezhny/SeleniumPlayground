@@ -1,6 +1,5 @@
 package pages;
 
-import libs.ConfigProperties;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -105,18 +104,19 @@ public class HomePage extends ParentPage{
         return this;
     }
 
-    public HomePage checkMenuItemsPresenceByName() {
+    public HomePage checkLeftMenuItemsArePresent() {
+        ArrayList<String> actualListFromWebElement = new ArrayList<>();
+        for (WebElement element: listOfMenuItems){
+            actualListFromWebElement.add(element.getText());
+        }
+        Collections.sort(actualListFromWebElement);
+
         List expectedListFromFile = configProperties.list_of_menu_names();
         Collections.sort(expectedListFromFile);
 
-        ArrayList<String> listFromWebelement = new ArrayList<>();
-        for (WebElement element: listOfMenuItems){
-            listFromWebelement.add(element.getText());
-        }
-        Collections.sort(listFromWebelement);
-        logger.info(listFromWebelement);
-        logger.info(expectedListFromFile);
-        Assert.assertEquals(listFromWebelement,expectedListFromFile);
+        logger.info(actualListFromWebElement + " menu items are present on the page");
+        logger.info(expectedListFromFile + " is the expected list from .properties file");
+        Assert.assertEquals(actualListFromWebElement,expectedListFromFile);
         return this;
     }
 }
