@@ -10,7 +10,8 @@ public class CheckUserRoleFilterTest extends BaseTest {
         homePage
                 .openHomePage()
                 .clickAdminTab()
-                .checkIsRedirectedToAdminPage()
+            .checkIsRedirectedToAdminPage()
+                .selectValueInDDByUI("Admin")
                 ;
     }
 }
