@@ -4,6 +4,7 @@ import libs.ConfigProperties;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,6 +47,17 @@ public class CommonActionsWithElements {
             String name = getElementName(webElement);
             webElement.click();
             logger.info(name + " Element was clicked" );
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectTextInDDByUI(WebElement dropDown, String textValue){
+        try {
+            clickOnElement(dropDown);
+            clickOnElement(webDriver.findElement(By.xpath(String.format(".//*[@class='oxd-select-option']/span[text()='%s']", textValue))));
+            //clickOnElement(webDriver.findElement(By.xpath(".//*[@class='oxd-select-option']/span[contains(text(), 'Admin')]")));
+
         }catch (Exception e){
             printErrorAndStopTest(e);
         }

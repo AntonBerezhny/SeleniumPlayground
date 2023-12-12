@@ -28,6 +28,9 @@ public class HomePage extends ParentPage{
 
     private String menuItemContainText = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '%s')]]";
 
+    @FindBy(xpath = ".//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name' and text()='Admin']")
+    private WebElement adminTabLink;
+
 
 
 
@@ -118,5 +121,10 @@ public class HomePage extends ParentPage{
         logger.info(expectedListFromFile + " is the expected list from .properties file");
         Assert.assertEquals(actualListFromWebElement,expectedListFromFile);
         return this;
+    }
+
+    public AdminPage clickAdminTab() {
+        clickOnElement(adminTabLink);
+        return new AdminPage(webDriver);
     }
 }
