@@ -55,7 +55,8 @@ public class CommonActionsWithElements {
     protected void selectTextInDDByUI(WebElement dropDown, String textValue){
         try {
             clickOnElement(dropDown);
-            clickOnElement(webDriver.findElement(By.xpath(".//*[@class='oxd-select-option'][2]")));
+            clickOnElement(webDriver.findElement(By.xpath(String.format(".//*[@class='oxd-select-option']/span[text()='%s']", textValue))));
+            //clickOnElement(webDriver.findElement(By.xpath(".//*[@class='oxd-select-option']/span[contains(text(), 'Admin')]")));
 
         }catch (Exception e){
             printErrorAndStopTest(e);
