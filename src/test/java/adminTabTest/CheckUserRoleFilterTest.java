@@ -13,13 +13,13 @@ public class CheckUserRoleFilterTest extends BaseTest {
                 .openHomePage()
                 .clickAdminTab()
             .checkIsRedirectedToAdminPage()
-                .selectValueInDDByUI(ADMIN_USER_ROLE)
-                .clickTheSearchButton()
-                .checkSearchResultTableContainsEnteredValue(ADMIN_USER_ROLE)
-                .clickTheResetButton()
                 .selectValueInDDByUI(ESS_USER_ROLE)
                 .clickTheSearchButton()
                 .checkSearchResultTableContainsEnteredValue(ESS_USER_ROLE)
+                .clickTheResetButton()
+                .selectValueInDDByUI(ADMIN_USER_ROLE)
+                .clickTheSearchButton()
+                .checkSearchResultTableContainsEnteredValue(ADMIN_USER_ROLE)
                 ;
     }
 }
