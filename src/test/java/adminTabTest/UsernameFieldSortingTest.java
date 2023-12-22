@@ -8,6 +8,7 @@ public class UsernameFieldSortingTest extends BaseTest {
     public void sortingByUsernameColumn(){
     homePage
             .openHomePage()
+            .clickAdminTab()
 
             ;
 }
