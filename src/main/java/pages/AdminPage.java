@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AdminPage extends ParentPage{
@@ -18,6 +21,11 @@ public class AdminPage extends ParentPage{
     @FindBy(css = ".oxd-table-body>.oxd-table-card>.oxd-table-row>.oxd-table-cell:nth-of-type(3)")
     private List<WebElement> userRoleCellValue;
     // ".//*[@class='oxd-table-body']/div/div[@class='oxd-table-row oxd-table-row--with-border']/div[@role='cell'][3]")
+
+    private static final String usernameCellString = ".oxd-table-body>.oxd-table-card>.oxd-table-row>.oxd-table-cell:nth-of-type(2)";
+
+    @FindBy(css = usernameCellString)
+    private List<WebElement> usernameCellValue;
 
     @FindBy(xpath = ".//button[text()=' Reset ']")
     private WebElement resetButton;
@@ -65,6 +73,23 @@ public class AdminPage extends ParentPage{
 
     public AdminPage clickTheResetButton() {
         clickOnElement(resetButton);
+        return this;
+    }
+
+    public AdminPage verifyUsernameColumnSortingIsAscending() {
+        ArrayList<String> actualListFromWebelement = new ArrayList<>();
+        for (WebElement element: usernameCellValue){
+            actualListFromWebelement.add(element.getText());
+        }
+        //logger.info(actualListFromWebelement);
+        ArrayList<String> sortedListFromWebelement = actualListFromWebelement;
+        //Collections.sort(sortedListFromWebelement);
+        Collections.sort(sortedListFromWebelement, Collections.reverseOrder());
+
+        logger.info(actualListFromWebelement);
+        logger.info(sortedListFromWebelement);
+
+        //Assert.assertEquals(actualListFromWebelement, Collections.sort(usernameCellValue));
         return this;
     }
 }
