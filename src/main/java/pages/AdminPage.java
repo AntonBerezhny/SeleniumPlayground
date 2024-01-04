@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class AdminPage extends ParentPage{
-    @FindBy(xpath = ".//span[@class='oxd-text oxd-text--span' and text()[contains(.,'Records Found')]]")
+    @FindBy(xpath = ".//span[@class='oxd-text oxd-text--span' and text()[contains(.,'Found')]]")
     private WebElement filterResultTitle;
 
     @FindBy(xpath = ".//div[contains(@class, 'oxd-input-group oxd-input-field-bottom-space') and descendant::label[text()='User Role']]//div[contains(text(), 'Select')]")
@@ -78,18 +78,25 @@ public class AdminPage extends ParentPage{
 
     public AdminPage verifyUsernameColumnSortingIsAscending() {
         ArrayList<String> actualListFromWebelement = new ArrayList<>();
+        ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
         for (WebElement element: usernameCellValue){
             actualListFromWebelement.add(element.getText());
+            toBeEditableListFromWebelement.add(element.getText());
         }
-        //logger.info(actualListFromWebelement);
-        ArrayList<String> sortedListFromWebelement = actualListFromWebelement;
-        //Collections.sort(sortedListFromWebelement);
-        Collections.sort(sortedListFromWebelement, Collections.reverseOrder());
 
-        logger.info(actualListFromWebelement);
-        logger.info(sortedListFromWebelement);
+        actualListFromWebelement.replaceAll(String::toLowerCase);
 
-        //Assert.assertEquals(actualListFromWebelement, Collections.sort(usernameCellValue));
+        toBeEditableListFromWebelement.replaceAll(String::toLowerCase);
+        Collections.sort(toBeEditableListFromWebelement);
+
+        if (actualListFromWebelement.equals(toBeEditableListFromWebelement) == true){
+            logger.info("Lists are equal, the list is sorted by Ascending order");
+        }else {
+            logger.info("Actual list " + actualListFromWebelement);
+            logger.info("Edible list " + toBeEditableListFromWebelement);
+            Assert.fail("Lists are not equal");
+        }
+
         return this;
     }
 }
