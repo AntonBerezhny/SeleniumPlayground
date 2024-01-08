@@ -31,6 +31,8 @@ public class AdminPage extends ParentPage{
     private WebElement resetButton;
     @FindBy(xpath = ".//button[text()=' Search ']")
     private WebElement searchButton;
+    @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']//i[@class='oxd-icon bi-sort-alpha-down oxd-icon-button__icon oxd-table-header-sort-icon']")
+    private WebElement usernameSortingDD;
 
     public AdminPage(WebDriver webDriver) {
         super(webDriver);
@@ -76,7 +78,7 @@ public class AdminPage extends ParentPage{
         return this;
     }
 
-    public AdminPage verifyUsernameColumnSortingIsAscending() {
+    public AdminPage verifyUsernameColumnDefaultSortingIsAscending() {
         ArrayList<String> actualListFromWebelement = new ArrayList<>();
         ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
         for (WebElement element: usernameCellValue){
@@ -97,6 +99,11 @@ public class AdminPage extends ParentPage{
             Assert.fail("Lists are not equal");
         }
 
+        return this;
+    }
+
+    public AdminPage setUsernameColumnSorting(String sortingType) {
+        selectTextInDDByUI(usernameSortingDD, sortingType);
         return this;
     }
 }
