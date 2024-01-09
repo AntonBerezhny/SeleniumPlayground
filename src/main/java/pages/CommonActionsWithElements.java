@@ -52,14 +52,28 @@ public class CommonActionsWithElements {
         }
     }
 
-    protected void selectTextInDDByUI(WebElement dropDown, String textValue){
+    protected void selectTextInDDByUI(WebElement dropDown,  String textValue){
         try {
             clickOnElement(dropDown);
-            clickOnElement(webDriver.findElement(By.xpath(String.format(".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']/descendant::span[@class='oxd-text oxd-text--span' and text()='%s']", textValue))));
+
             //clickOnElement(webDriver.findElement(By.xpath(String.format(".//*[@class='oxd-select-option']/span[text()='%s']", textValue))));
             //clickOnElement(webDriver.findElement(By.xpath(".//*[@class='oxd-select-option']/span[contains(text(), 'Admin')]")));
             clickOnElement(webDriver.findElement(By.xpath(".//span[@class='asdf']")));
 
+
+//            clickOnElement(usernameSortingDD);
+//            clickOnElement(usernameSortingDD.findElement(By.xpath(String.format(usernameSortingDDOption, sortingType))));
+//            //webDriver.findElements(By.xpath(String.format(usernameSortingDDOption, sortingType)));
+
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+
+    protected void selectTextInSortingDD(WebElement dropDown, String dropDownOption, String textValue){
+        try {
+            clickOnElement(dropDown);
+            clickOnElement(webDriver.findElement(By.xpath(String.format(dropDownOption, textValue))));
         }catch (Exception e){
             printErrorAndStopTest(e);
         }

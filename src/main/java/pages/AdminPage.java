@@ -1,6 +1,7 @@
 package pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,12 @@ public class AdminPage extends ParentPage{
     private WebElement searchButton;
     @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']//i[@class='oxd-icon bi-sort-alpha-down oxd-icon-button__icon oxd-table-header-sort-icon']")
     private WebElement usernameSortingDD;
+
+//    @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']/descendant::span[@class='oxd-text oxd-text--span' and text()='%s']")
+//    private String usernameSortingDDOption;
+
+    private final static String usernameSortingDDOption = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']/descendant::span[@class='oxd-text oxd-text--span' and text()='%s']";
+
 
     public AdminPage(WebDriver webDriver) {
         super(webDriver);
@@ -102,8 +109,33 @@ public class AdminPage extends ParentPage{
         return this;
     }
 
-    public AdminPage setUsernameColumnSorting(String sortingType) {
-        selectTextInDDByUI(usernameSortingDD, sortingType);
+    public AdminPage verifyUsernameColumnSortingISDescending() {
+        ArrayList<String> actualListFromWebelement = new ArrayList<>();
+        ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
+        for (WebElement element: usernameCellValue){
+            actualListFromWebelement.add(element.getText());
+            toBeEditableListFromWebelement.add(element.getText());
+        }
+
+        actualListFromWebelement.replaceAll(String::toLowerCase);
+
+        toBeEditableListFromWebelement.replaceAll(String::toLowerCase);
+        Collections.sort(toBeEditableListFromWebelement, Collections.reverseOrder());
+
+        if (actualListFromWebelement.equals(toBeEditableListFromWebelement) == true){
+            logger.info("Lists are equal, the list is sorted by Descending order");
+        }else {
+            logger.info("Actual list " + actualListFromWebelement);
+            logger.info("Edible list " + toBeEditableListFromWebelement);
+            Assert.fail("Lists are not equal");
+        }
         return this;
     }
+
+    public AdminPage setUsernameColumnSorting(String sortingType) {
+        selectTextInSortingDD(usernameSortingDD, usernameSortingDDOption, sortingType);
+        return this;
+    }
+
+
 }
