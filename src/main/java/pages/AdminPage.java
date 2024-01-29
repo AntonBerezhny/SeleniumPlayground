@@ -33,7 +33,10 @@ public class AdminPage extends ParentPage{
     @FindBy(xpath = ".//button[text()=' Search ']")
     private WebElement searchButton;
     @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']//i[@class='oxd-icon bi-sort-alpha-down oxd-icon-button__icon oxd-table-header-sort-icon']")
-    private WebElement usernameSortingDD;
+    private WebElement usernameSortingDD;//changed to ..DDTest as the class changes upon filtering
+
+    @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']/div[@class='oxd-table-header-sort']")
+    private WebElement usernameSortingDDTest;
 
 //    @FindBy(xpath = ".//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th' and text()='Username']/descendant::span[@class='oxd-text oxd-text--span' and text()='%s']")
 //    private String usernameSortingDDOption;
@@ -133,7 +136,7 @@ public class AdminPage extends ParentPage{
     }
 
     public AdminPage setUsernameColumnSorting(String sortingType) {
-        selectTextInSortingDD(usernameSortingDD, usernameSortingDDOption, sortingType);
+        selectTextInSortingDD(usernameSortingDDTest, usernameSortingDDOption, sortingType);
         return this;
     }
 
