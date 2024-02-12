@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class CommonActionsWithElements {
     WebDriver webDriver; //this webDriver is available in all pages
@@ -77,6 +78,10 @@ public class CommonActionsWithElements {
         }catch (Exception e){
             printErrorAndStopTest(e);
         }
+    }
+
+    protected void sortListBy(List<WebElement> usernameList, String sortingDirection){
+
     }
 
     protected void clearTheInputField(WebElement webElement){

@@ -1,7 +1,6 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -88,7 +87,7 @@ public class AdminPage extends ParentPage{
         return this;
     }
 
-    public AdminPage verifyUsernameColumnDefaultSortingIsAscending() {
+    public AdminPage oldverifyUsernameColumnDefaultSortingIsAscending() {
         ArrayList<String> actualListFromWebelement = new ArrayList<>();
         ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
         for (WebElement element: usernameCellValue){
@@ -112,7 +111,12 @@ public class AdminPage extends ParentPage{
         return this;
     }
 
-    public AdminPage verifyUsernameColumnSortingISDescending() {
+    public AdminPage verifyUsernameColumnSortingIs(String sortingDirection) {
+        sortListBy(usernameCellValue, sortingDirection);
+        return this;
+    }
+
+    public AdminPage verifyUsernameColumnSortingIs() {
         ArrayList<String> actualListFromWebelement = new ArrayList<>();
         ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
         for (WebElement element: usernameCellValue){
@@ -139,6 +143,7 @@ public class AdminPage extends ParentPage{
         selectTextInSortingDD(usernameSortingDDTest, usernameSortingDDOption, sortingType);
         return this;
     }
+
 
 
 }
