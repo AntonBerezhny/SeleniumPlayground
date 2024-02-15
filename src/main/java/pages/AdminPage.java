@@ -1,6 +1,7 @@
 package pages;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -87,62 +88,31 @@ public class AdminPage extends ParentPage{
         return this;
     }
 
-    public AdminPage oldverifyUsernameColumnDefaultSortingIsAscending() {
-        ArrayList<String> actualListFromWebelement = new ArrayList<>();
-        ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
-        for (WebElement element: usernameCellValue){
-            actualListFromWebelement.add(element.getText());
-            toBeEditableListFromWebelement.add(element.getText());
-        }
-
-        actualListFromWebelement.replaceAll(String::toLowerCase);
-
-        toBeEditableListFromWebelement.replaceAll(String::toLowerCase);
-        Collections.sort(toBeEditableListFromWebelement);
-
-        if (actualListFromWebelement.equals(toBeEditableListFromWebelement) == true){
-            logger.info("Lists are equal, the list is sorted by Ascending order");
-        }else {
-            logger.info("Actual list " + actualListFromWebelement);
-            logger.info("Edible list " + toBeEditableListFromWebelement);
-            Assert.fail("Lists are not equal");
-        }
-
-        return this;
-    }
-
     public AdminPage verifyUsernameColumnSortingIs(String sortingDirection) {
-        sortListBy(usernameCellValue, sortingDirection);
-        return this;
-    }
-
-    public AdminPage verifyUsernameColumnSortingIs() {
         ArrayList<String> actualListFromWebelement = new ArrayList<>();
-        ArrayList<String> toBeEditableListFromWebelement = new ArrayList<>();
+        ArrayList<String> tobeModifiedListFromWebelement = new ArrayList<>();
         for (WebElement element: usernameCellValue){
             actualListFromWebelement.add(element.getText());
-            toBeEditableListFromWebelement.add(element.getText());
+            tobeModifiedListFromWebelement.add(element.getText());
         }
-
         actualListFromWebelement.replaceAll(String::toLowerCase);
+        tobeModifiedListFromWebelement.replaceAll(String::toLowerCase);
 
-        toBeEditableListFromWebelement.replaceAll(String::toLowerCase);
-        Collections.sort(toBeEditableListFromWebelement, Collections.reverseOrder());
-
-        if (actualListFromWebelement.equals(toBeEditableListFromWebelement) == true){
-            logger.info("Lists are equal, the list is sorted by Descending order");
-        }else {
-            logger.info("Actual list " + actualListFromWebelement);
-            logger.info("Edible list " + toBeEditableListFromWebelement);
-            Assert.fail("Lists are not equal");
+        if (sortingDirection.equalsIgnoreCase("Asc")){
+            Collections.sort(tobeModifiedListFromWebelement);
+        } else if (sortingDirection.equalsIgnoreCase("Desc")) {
+            Collections.sort(tobeModifiedListFromWebelement, Collections.reverseOrder());
         }
+
+        Assertions.assertIterableEquals(actualListFromWebelement, tobeModifiedListFromWebelement, "Lists are not equal");
         return this;
     }
+
 
     public AdminPage setUsernameColumnSorting(String sortingType) {
         selectTextInSortingDD(usernameSortingDDTest, usernameSortingDDOption, sortingType);
         return this;
-    }
+    } //Todo - think of creating method which will sort fields sortListBy(fieldname, isasc)...
 
 
 
