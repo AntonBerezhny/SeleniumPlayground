@@ -10,11 +10,11 @@ public class UsernameFieldSortingTest extends BaseTest {
             .openHomePage()
             .clickAdminTab()
         .checkIsRedirectedToAdminPage()
-            .verifyUsernameColumnDefaultSortingIsAscending()
+            .verifyUsernameColumnSortingIs("Asc")
             .setUsernameColumnSorting("Descending")
-            .verifyUsernameColumnSortingISDescending()
+            .verifyUsernameColumnSortingIs("Desc")
             .setUsernameColumnSorting("Ascending")
-            .verifyUsernameColumnDefaultSortingIsAscending()
+            .verifyUsernameColumnSortingIs("Asc")
 
             ;
 }
